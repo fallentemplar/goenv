@@ -53,3 +53,35 @@ func TestGetBool(t *testing.T) {
 		t.Errorf("Unexpected result. Expected: %t\tReceived: %t", expectedResult, result)
 	}
 }
+
+func TestGetString(t *testing.T) {
+	//Getting a non-existent variable
+	os.Setenv("environment_name", "")
+
+	expectedResult := "development"
+	result := goenv.GetString("environment_name", "development")
+
+	if result != expectedResult {
+		t.Errorf("Unexpected result: Expecting: %s\tReceived: %s", expectedResult, result)
+	}
+
+	//Getting an existent variable
+	os.Setenv("environment_name", "development")
+
+	expectedResult = "development"
+	result = goenv.GetString("environment_name", "development")
+
+	if result != expectedResult {
+		t.Errorf("Unexpected result: Expecting: %s\tReceived: %s", expectedResult, result)
+	}
+
+	//Getting an existent variable with another default value
+	os.Setenv("environment_name", "development")
+
+	expectedResult = "development"
+	result = goenv.GetString("environment_name", "production")
+
+	if result != expectedResult {
+		t.Errorf("Unexpected result: Expecting: %s\tReceived: %s", expectedResult, result)
+	}
+}

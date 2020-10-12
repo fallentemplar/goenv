@@ -23,6 +23,7 @@ func GetInt(key string, defaultValue int) (value int) {
 // GetBool recovers an environment variable with the key as the received parameter
 // and casts it to a boolean. If the requested variable doesn't exists, returns the
 // default value
+// It considers 'true' and '1' as truthy values and 'false' and '0' as falsy values
 func GetBool(key string, defaultValue bool) (value bool) {
 	variable := os.Getenv(key)
 	if len(variable) == 0 {
@@ -36,4 +37,17 @@ func GetBool(key string, defaultValue bool) (value bool) {
 	}
 
 	return defaultValue
+}
+
+// GetString recovers an environment variable with the key as the received parameter
+// and casts it to an int. If the requested variable doesn't exists, returns the
+// default value
+func GetString(key string, defaultValue string) string {
+	variable := os.Getenv(key)
+
+	if len(variable) == 0 {
+		return defaultValue
+	}
+
+	return variable
 }

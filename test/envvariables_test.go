@@ -85,16 +85,3 @@ func TestGetString(t *testing.T) {
 		t.Errorf("Unexpected result: Expecting: %s\tReceived: %s", expectedResult, result)
 	}
 }
-
-func TestGithubActions(t *testing.T) {
-	// Getting a existent variable but expecting another value
-	// This is a temp test for verifying the GH action is runing right
-	os.Setenv("environment_name", "github")
-
-	expectedResult := "development"
-	result := goenv.GetString("environment_name", "development")
-
-	if result != expectedResult {
-		t.Errorf("Unexpected result: Expecting: %s\tReceived: %s", expectedResult, result)
-	}
-}
